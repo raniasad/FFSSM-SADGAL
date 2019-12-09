@@ -16,11 +16,14 @@ public class Club {
     public String adresse;
 
     public String telephone;
+    
+    public Set<Plongee> plongeesOrganisees; 
 
     public Club(Moniteur président, String nom, String telephone) {
         this.president = président;
         this.nom = nom;
         this.telephone = telephone;
+        plongeesOrganisees = new HashSet<>();
     }
 
     /**
@@ -30,8 +33,13 @@ public class Club {
      * @return l'ensemble des plongées non conformes
      */
     public Set<Plongee> plongeesNonConformes() {
-         // TODO: Implémenter cette méthode
-        throw new UnsupportedOperationException("Pas encore implémenté");
+          Set<Plongee> mesPlongeesPasConforme = new HashSet<>();
+        for (Plongee plongee : plongeesOrganisees){
+            if(!plongee.estConforme()){
+                mesPlongeesPasConforme.add(plongee);
+            }
+        }
+        return mesPlongeesPasConforme;
     }
 
     /**
@@ -39,11 +47,9 @@ public class Club {
      * @param p la nouvelle plongée
      */
     public void organisePlongee(Plongee p) {
-         // TODO: Implémenter cette méthode
-        throw new UnsupportedOperationException("Pas encore implémenté");
+         plongeesOrganisees.add(p);
+    
     }
-    
-    
     public Moniteur getPresident() {
         return president;
     }
